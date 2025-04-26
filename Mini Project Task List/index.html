@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habit Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8f7;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .habit-tracker {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #7fbf7f;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .username-input {
+            width: calc(50% - 10px);
+            margin-bottom: 20px;
+        }
+
+        .input-container input[type="text"],
+        .input-container select,
+        .input-container button {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .input-container input[type="text"],
+        .input-container select {
+            width: calc(50% - 10px);
+            margin-right: 10px;
+        }
+
+        .input-container button {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+
+        .input-container button:hover {
+            background-color: #45a049;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .columns {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .column {
+            flex: 1;
+            border-radius: 20px;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .column h2 {
+            margin-top: 0;
+            font-size: 24px;
+            color: #333333;
+        }
+
+        .daily-column {
+            background-color: #f6f8fa;
+        }
+
+        .weekly-column {
+            background-color: #f6f8fa;
+        }
+
+        .monthly-column {
+            background-color: #f6f8fa;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul li {
+            margin-bottom: 15px;
+        }
+
+        ul li label {
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        ul li label input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        ul li button {
+            padding: 8px 12px;
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        ul li button:hover {
+            background-color: #cc0000;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .habit-tracker {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .habit-tracker h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .habit-tracker input[type="text"],
+        .habit-tracker select {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        .habit-tracker button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .habit-tracker button.delete {
+            background-color: #f44336;
+            margin-left: 10px;
+        }
+
+        .habit-tracker button:hover {
+            background-color: #45a049;
+        }
+
+        .columns {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .column {
+            flex: 1 1 30%;
+            margin-right: 10px;
+        }
+
+        .column:last-child {
+            margin-right: 0;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        li label {
+            flex: 1;
+            display: flex;
+            align-items: center;
+        }
+
+        li span {
+            flex: 1;
+        }
+
+        li button {
+            background-color: #f44336;
+            color: white;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        li button:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+        const HabitTracker = () => {
+            const [username, setUsername] = useState('');
+            const [userHabits, setUserHabits] = useState({});
+            const [habitName, setHabitName] = useState('');
+            const [habitFrequency, setHabitFrequency] = useState('daily');
+            useEffect(() => {
+                // Load user habits from localStorage when component mounts
+                const storedUserHabits = localStorage.getItem(username);
+                if (storedUserHabits) {
+                    setUserHabits(JSON.parse(storedUserHabits));
+                }
+            }, [username]);
+            const UsernameChange = (e) => {
+                setUsername(e.target.value);
+            };
+            const AddHabit = () => {
+                if (!habitName.trim()) return;
+                const updatedHabits = { ...userHabits };
+                updatedHabits[habitFrequency] = updatedHabits[habitFrequency] || [];
+                updatedHabits[habitFrequency].push({ id: Date.now(), name: habitName, frequency: habitFrequency, completed: false });
+                setUserHabits(updatedHabits);
+                setHabitName('');
+            };
+            const taskCompletion = (frequency, id) => {
+                const updatedHabits = { ...userHabits };
+                const habitIndex = updatedHabits[frequency].findIndex(habit => habit.id === id);
+                const habit = updatedHabits[frequency][habitIndex];
+                updatedHabits[frequency].splice(habitIndex, 1);
+                habit.completed = !habit.completed;
+                if (habit.completed) {
+                    updatedHabits[frequency].push(habit);
+                } else {
+                    updatedHabits[frequency].unshift(habit);
+                }
+                setUserHabits(updatedHabits);
+            };
+            const DeleteHabit = (frequency, id) => {
+                const updatedHabits = { ...userHabits };
+                updatedHabits[frequency] = updatedHabits[frequency].filter(habit => habit.id !== id);
+                setUserHabits(updatedHabits);
+            };
+            useEffect(() => {
+                // Save user habits to localStorage when userHabits state changes
+                localStorage.setItem(username, JSON.stringify(userHabits));
+            }, [username, userHabits]);
+            const renderHabits = (frequency) => {
+                return userHabits[frequency] && userHabits[frequency].map(habit => (
+                    <li key={habit.id}>
+                        <label style={{ textDecoration: habit.completed ? 'line-through' : 'none' }}>
+                            <input type="checkbox" checked={habit.completed} onChange={() => taskCompletion(frequency, habit.id)} />
+                            <span>{habit.name}</span>
+                        </label>
+                        <button className="delete" onClick={() => DeleteHabit(frequency, habit.id)}>Delete</button>
+                    </li>
+                ));
+            };
+            return (
+                <div className="habit-tracker">
+                    <h1>Habit Tracker</h1>
+                    <input type="text" value={username} onChange={UsernameChange} placeholder="Enter username" />
+                    <div>
+                        <input type="text" value={habitName} onChange={(e) => setHabitName(e.target.value)} placeholder="Enter habit name" />
+                        <select value={habitFrequency} onChange={(e) => setHabitFrequency(e.target.value)}>
+                            <option value="daily">Daily</option>
+                            <option value="weekly">Weekly</option>
+                            <option value="monthly">Monthly</option>
+                        </select>
+                        <button onClick={AddHabit}>Add Habit</button>
+                    </div>
+                    <div className="columns">
+                        <div className="column">
+                            <h2>Daily Tasks</h2>
+                            <ul>
+                                {renderHabits('daily')}
+                            </ul>
+                        </div>
+                        <div className="column">
+                            <h2>Weekly Tasks</h2>
+                            <ul>
+                                {renderHabits('weekly')}
+                            </ul>
+                        </div>
+                        <div className="column">
+                            <h2>Monthly Tasks</h2>
+                            <ul>
+                                {renderHabits('monthly')}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+        ReactDOM.render(<HabitTracker />, document.getElementById('root'));
+    </script>
+</body>
+
+</html>

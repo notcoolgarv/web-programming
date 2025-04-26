@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linked List Stack</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        button {
+            margin: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #output {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <button onclick="push()">Push</button>
+        <button onclick="pop()">Pop</button>
+        <button onclick="display()">Display</button>
+        <button onclick="reverse()">Reverse</button>
+        <button onclick="total()">Total</button>
+        <div id="output"></div>
+    </div>
+
+    <script>
+        class Node {
+            constructor(data) {
+                this.data = data;
+                this.next = null;
+            }
+        }
+
+        class Stack {
+            constructor() {
+                this.top = null;
+                this.length = 0;
+            }
+
+            push(data) {
+                const newNode = new Node(data);
+                newNode.next = this.top;
+                this.top = newNode;
+                this.length++;
+            }
+
+            pop() {
+                if (!this.top) return null;
+                const poppedData = this.top.data;
+                this.top = this.top.next;
+                this.length--;
+                return poppedData;
+            }
+
+            display() {
+                let current = this.top;
+                let result = '';
+                while (current) {
+                    result += current.data + ' ';
+                    current = current.next;
+                }
+                return result.trim();
+            }
+
+            reverse() {
+                let prev = null;
+                let current = this.top;
+                let next = null;
+                while (current) {
+                    next = current.next;
+                    current.next = prev;
+                    prev = current;
+                    current = next;
+                }
+                this.top = prev;
+            }
+
+            getTotal() {
+                return this.length;
+            }
+        }
+
+        const stack = new Stack();
+
+        function push() {
+            const data = prompt('Enter a value to push:');
+            if (data !== null) {
+                stack.push(data);
+                displayOutput('Pushed ' + data);
+            }
+        }
+
+        function pop() {
+            const poppedData = stack.pop();
+            if (poppedData !== null) {
+                displayOutput('Popped ' + poppedData);
+            } else {
+                displayOutput('Stack is empty');
+            }
+        }
+
+        function display() {
+            const stackContents = stack.display();
+            if (stackContents) {
+                displayOutput('Stack contents: ' + stackContents);
+            } else {
+                displayOutput('Stack is empty');
+            }
+        }
+
+        function reverse() {
+            stack.reverse();
+            displayOutput('Stack reversed');
+        }
+
+        function total() {
+            const length = stack.getTotal();
+            displayOutput('Total elements in stack: ' + length);
+        }
+
+        function displayOutput(message) {
+            document.getElementById('output').textContent = message;
+        }
+    </script>
+
+</body>
+
+</html>

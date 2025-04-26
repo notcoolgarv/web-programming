@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>CSS Grid Example</title>
+</head>
+
+<body>
+
+    <div class="grid-container">
+        <div class="grid-item item1"> Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt
+            ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullam corporis
+            suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur. Quis aute iure reprehenderit in voluptate
+            velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum</div>
+        <div class="grid-item item2"> Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt
+            ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullam corporis
+            suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur. Quis aute iure reprehenderit in voluptate
+            velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum</div>
+        <div class="grid-item item3"> Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt
+            ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullam corporis
+            suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur. Quis aute iure reprehenderit in voluptate
+            velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum</div>
+        <div class="grid-item item4"> Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt
+            ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullam corporis
+            suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur. Quis aute iure reprehenderit in voluptate
+            velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum</div>
+        <div class="grid-item item5"> Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt
+            ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullam corporis
+            suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur. Quis aute iure reprehenderit in voluptate
+            velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum</div>
+        <div class="grid-item item6"> Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt
+            ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullam corporis
+            suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur. Quis aute iure reprehenderit in voluptate
+            velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum</div>
+    </div>
+
+</body>
+
+</html>
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+    }
+
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        padding: 20px;
+    }
+
+    .grid-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.5em;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .item1 {
+        background-color: #3498db;
+    }
+
+    .item2 {
+        background-color: #e74c3c;
+    }
+
+    .item3 {
+        background-color: #2ecc71;
+    }
+
+    .item4 {
+        background-color: #f39c12;
+    }
+
+    .item5 {
+        background-color: #9b59b6;
+    }
+
+    .item6 {
+        background-color: #1abc9c;
+    }
+</style>

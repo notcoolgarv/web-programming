@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+
+        input,
+        button {
+            margin: 10px;
+            padding: 5px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Simple Calculator</h1>
+
+    <label for="num1">Enter first number: </label>
+    <input type="number" id="num1">
+
+    <label for="num2">Enter second number: </label>
+    <input type="number" id="num2">
+
+    <br>
+
+    <button onclick="add()">Add</button>
+    <button onclick="subtract()">Subtract</button>
+    <button onclick="multiply()">Multiply</button>
+    <button onclick="divide()">Divide</button>
+
+    <br>
+
+    <h2>Result: <span id="result"></span></h2>
+
+    <script>
+        function add() {
+            performOperation((num1, num2) => num1 + num2);
+        }
+
+        function subtract() {
+            performOperation((num1, num2) => num1 - num2);
+        }
+
+        function multiply() {
+            performOperation((num1, num2) => num1 * num2);
+        }
+
+        function divide() {
+            performOperation((num1, num2) => {
+                if (num2 !== 0) {
+                    return num1 / num2;
+                } else {
+                    alert("Cannot divide by zero!");
+                    return NaN;
+                }
+            });
+        }
+
+        function performOperation(operation) {
+            const num1 = parseFloat(document.getElementById("num1").value);
+            const num2 = parseFloat(document.getElementById("num2").value);
+            const resultElement = document.getElementById("result");
+
+            if (isNaN(num1) || isNaN(num2)) {
+                alert("Please enter valid numbers!");
+                resultElement.textContent = "";
+            } else {
+                const result = operation(num1, num2);
+                resultElement.textContent = isNaN(result) ? "" : result;
+            }
+        }
+    </script>
+
+</body>
+
+</html>

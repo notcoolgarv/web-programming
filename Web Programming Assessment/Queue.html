@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Queue Visualization</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .queue-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .queue {
+            display: flex;
+            flex-direction: row;
+            padding: 10px;
+            border: 2px solid black;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .queue-item {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid black;
+            margin: 0 5px;
+        }
+
+        .queue-controls {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .queue-controls button {
+            margin: 0 5px;
+            padding: 8px 16px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="queue-container">
+        <div class="queue" id="queue"></div>
+        <div class="queue-controls">
+            <button onclick="enqueue()">Enqueue</button>
+            <button onclick="dequeue()">Dequeue</button>
+        </div>
+    </div>
+
+    <script>
+        const queue = [1, 2, 3, 4, 5]; // Initial queue
+
+        function renderQueue() {
+            const queueElement = document.getElementById('queue');
+            queueElement.innerHTML = '';
+
+            for (let i = 0; i < queue.length; i++) {
+                const item = document.createElement('div');
+                item.classList.add('queue-item');
+                item.textContent = queue[i];
+                queueElement.appendChild(item);
+            }
+        }
+
+        function enqueue() {
+            const newItem = prompt('Enter a number to enqueue:');
+            if (!isNaN(newItem)) {
+                queue.push(parseInt(newItem));
+                renderQueue();
+            } else {
+                alert('Please enter a valid number!');
+            }
+        }
+
+        function dequeue() {
+            if (queue.length === 0) {
+                alert('Queue is empty!');
+            } else {
+                queue.shift();
+                renderQueue();
+            }
+        }
+
+        renderQueue();
+    </script>
+
+</body>
+
+</html>
